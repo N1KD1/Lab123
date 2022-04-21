@@ -26,6 +26,32 @@ void show_array(const student *studs, int size)
 
 void shaker_sort(student *studs, int size)
 {
+	int left=1;
+	int right=size-1;
+	do
+	{
+		for(int i =right;i>=left;i--)
+		{
+			if (studs[i - 1].mark < studs[i].mark)
+			{
+				student temp = studs[i];
+				studs[i] = studs[i - 1];
+				studs[i - 1] = temp;
+			}
+		}
+		left++;
+		for (int i = left; i <= right; i++)
+		{
+			if (studs[i - 1].mark < studs[i].mark)
+			{
+				student temp = studs[i];
+				studs[i] = studs[i - 1];
+				studs[i - 1] = temp;
+			}
+		}
+		right--;
+	}
+	while (left<=right);
 }
 
 void group_count(student *studs, int size)
@@ -51,7 +77,6 @@ void bubble_sort(student *studs, int size)
 		}
 	}
 	while (swapped);
-	
 }
 
 void index_search(student *studs, int size)
