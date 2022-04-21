@@ -42,13 +42,33 @@ void index_search(student *studs, int size)
 
 void rnd_fill(student *studs, int size)
 {
+	const string groups[5] = {"ABC","BSD","DOS","EUA","FAQ"};
+	srand(time(nullptr));
+	for(int i=0;i<size;i++)
+	{
+		student temp;
+		string surname;
+		string group;
+		const int name = rand() % 6 + 4;
+		for(int g = 0;g<name;g++)
+		{
+			surname.push_back(rand() % 26 + 97);
+		}
+		temp.group = groups[rand() % 5];
+		temp.surname = surname;
+		temp.mark = rand() % 60 + 40;
+		temp.status = rand() % 1;
+		studs[i] = temp;
+	}
 }
 
 void fill_blank(student *studs, int size)
 {
-	student temp = {"aaaa","bbbb",100,true};
+	srand(time(nullptr));
+	const student temp = {"aaaa","bbbb",100,true};
 	for(int i = 0;i<size;i++)
 	{
 		studs[i] = temp;
+		
 	}
 }
