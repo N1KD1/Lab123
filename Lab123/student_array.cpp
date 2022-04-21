@@ -33,7 +33,7 @@ void shaker_sort(student *studs, const int size)
 		{
 			if (studs[i - 1].mark < studs[i].mark)
 			{
-				student temp = studs[i];
+				const student temp = studs[i];
 				studs[i] = studs[i - 1];
 				studs[i - 1] = temp;
 			}
@@ -43,7 +43,7 @@ void shaker_sort(student *studs, const int size)
 		{
 			if (studs[i - 1].mark < studs[i].mark)
 			{
-				student temp = studs[i];
+				const student temp = studs[i];
 				studs[i] = studs[i - 1];
 				studs[i - 1] = temp;
 			}
@@ -53,9 +53,50 @@ void shaker_sort(student *studs, const int size)
 	while (left<=right);
 }
 
-void group_count(student *studs, int size)
+int distinct_count(const student *studs, const int size)
 {
+	int count = 0;
+	for (int i = 0; i < size; i++) {
+		// Moving the index when duplicate is found
+		while (i < size - 1 && studs[i].group == studs[i + 1].group) {
+			i++;
+		}
+		count++;
+		
+	}
+	return count;
+}
 
+void group_count(const student *studs, int size)
+{
+	const int amount = distinct_count(studs, size);
+	int left = 0;
+	for(int g = 0;g<= amount;g++)
+	{
+		
+		if (g == amount)
+		{
+			cout << "In " << studs[left].group << " is ";
+			cout << size-left << " students\n";
+			break;
+		}
+		string temp;
+		int counter=0;
+		for (int i = left; i < size; i++)
+		{
+			if(studs[left].group == studs[i].group)
+			{
+				++counter;
+			}
+			else
+			{
+				cout << "In " << studs[left].group << " is ";
+				cout << counter << " students\n";
+				left = i;
+				break;
+			}
+		}
+	}
 }
 
 void bubble_sort(student *studs, const int size)
@@ -70,7 +111,7 @@ void bubble_sort(student *studs, const int size)
 			if (studs[i].mark < studs[i + 1].mark)
 			{
 				swapped = true;
-				student temp = studs[i];
+				const student temp = studs[i];
 				studs[i] = studs[i + 1];
 				studs[i + 1] = temp;
 			}
@@ -124,6 +165,7 @@ void index_search(const std::string& key, const student* studs, const int size, 
 	}
 
 }
+
 void rnd_fill(student *studs, const int size)
 {
 	const string groups[5] = {"ABC","BSD","DOS","EUA","FAQ"};
@@ -167,7 +209,7 @@ void group_sort(student* studs, const int size)
 		{
 			if (studs[i - 1].group[0] > studs[i].group[0])
 			{
-				student temp = studs[i];
+				const student temp = studs[i];
 				studs[i] = studs[i - 1];
 				studs[i - 1] = temp;
 			}
@@ -177,7 +219,7 @@ void group_sort(student* studs, const int size)
 		{
 			if (studs[i - 1].group[0] > studs[i].group[0])
 			{
-				student temp = studs[i];
+				const student temp = studs[i];
 				studs[i] = studs[i - 1];
 				studs[i - 1] = temp;
 			}
@@ -197,7 +239,7 @@ void name_sort(student* studs, const int size)
 			{
 				if (studs[i - 1].surname[0] > studs[i].surname[0])
 				{
-					student temp = studs[i];
+					const student temp = studs[i];
 					studs[i] = studs[i - 1];
 					studs[i - 1] = temp;
 				}
@@ -207,7 +249,7 @@ void name_sort(student* studs, const int size)
 			{
 				if (studs[i - 1].surname[0] > studs[i].surname[0])
 				{
-					student temp = studs[i];
+					const student temp = studs[i];
 					studs[i] = studs[i - 1];
 					studs[i - 1] = temp;
 				}

@@ -18,7 +18,8 @@ struct groups_amount
 
 void show_array(const student *studs, int size);
 void shaker_sort(student *studs, int size);
-void group_count(student *studs, int size);
+int distinct_count(const student *studs, int size);
+void group_count(const student *studs, int size);
 void bubble_sort(student *studs, int size);
 void index_search(const std::string& key, const student* studs, const int size, std::string* index, const int step);
 void rnd_fill(student *studs, int size);
