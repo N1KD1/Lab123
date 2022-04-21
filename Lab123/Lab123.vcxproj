@@ -140,6 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lab123.cpp" />
+    <ClCompile Include="student_array.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="student_array.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

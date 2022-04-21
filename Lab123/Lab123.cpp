@@ -1,9 +1,8 @@
-﻿// Lab123.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include <iostream>
+#include "student_array.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	constexpr int arr_size = 30;
+
 }
