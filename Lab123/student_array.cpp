@@ -6,7 +6,7 @@
 
 using namespace std;	
 
-void show_array(const student *studs, int size)
+void show_array(const student *studs, const int size)
 {
 	cout <<setw(3) <<left << "#" << setw(10) << "SURNAME" << setw(10) << "GROUP" << setw(6) <<left<< "MARK" << setw(7) << right<< "STATUS\n";
 	for(int i =0;i<size;i++)
@@ -79,36 +79,52 @@ void bubble_sort(student *studs, const int size)
 	while (swapped);
 }
 
-
-
-void index_search(const std::string& key, const student *studs, const int size, std::string *index, const int step)
+void index_search(const std::string& key, const student* studs, const int size, std::string* index, const int step)
 {
+	int found_word = 0;
 	int found_key = 0;
-	for(int i=0;i<size/step;i++)
+	constexpr int accuracy = 4; // key.size() for ideal search or length of smallest word for comfort/fast search 
+	for (int i = 0; i < size / step; i++)
 	{
-		index[i] = studs[i*step].surname;
+		index[i] = studs[i * step].surname;
 	}
 	for (int i = 0; i < size / step; i++)
 	{
 		if (key[0] < index[i][0])
 		{
-			found_key = i - 1 ;
+			found_key = i - 1;
 			break;
 		}
 	}
-	for (int i = found_key * step; i <= (found_key +1) * step ; i++)
+	int success = 0;
+	for (int s = 0; s < key.size(); s++)
 	{
-		if (key[0] == studs[i].surname[0])
-		{
-			cout <<studs[i].surname <<" was found" << endl;  // or return
-			break;
-		}
-	}
-	cout << key << " not found.\n";
-}
-	
 
-void rnd_fill(student *studs, int size)
+		for (int i = found_key * step; i <= (found_key + 1) * step; i++)
+		{
+			if(studs[i].surname.size()>=key.size())
+			{
+				if (key[s] == studs[i].surname[s])
+				{
+					found_word = i;
+					++success;
+				}
+			}
+			
+		}
+
+	}
+	if (success >= accuracy) 
+	{
+		cout << found_word +1 << ' ' << studs[found_word].surname  << " was found.\n";
+	}
+	else
+	{
+		cout << key << " not found.\n";
+	}
+
+}
+void rnd_fill(student *studs, const int size)
 {
 	const string groups[5] = {"ABC","BSD","DOS","EUA","FAQ"};
 	srand(time(nullptr));
@@ -130,7 +146,7 @@ void rnd_fill(student *studs, int size)
 	}
 }
 
-void fill_blank(student *studs, int size)
+void fill_blank(student *studs, const int size)
 {
 	srand(time(nullptr));
 	const student temp = {"aaaa","bbbb",100,true};
@@ -141,7 +157,7 @@ void fill_blank(student *studs, int size)
 	}
 }
 
-void group_sort(student* studs, int size)
+void group_sort(student* studs, const int size)
 {
 	int left = 1;
 	int right = size - 1;
@@ -171,7 +187,7 @@ void group_sort(student* studs, int size)
 
 }
 
-void name_sort(student* studs, int size)
+void name_sort(student* studs, const int size)
 {
 		int left = 1;
 		int right = size - 1;
