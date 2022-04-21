@@ -79,9 +79,34 @@ void bubble_sort(student *studs, const int size)
 	while (swapped);
 }
 
-void index_search(student *studs, int size)
+
+
+void index_search(const std::string& key, const student *studs, const int size, std::string *index, const int step)
 {
+	int found_key = 0;
+	for(int i=0;i<size/step;i++)
+	{
+		index[i] = studs[i*step].surname;
+	}
+	for (int i = 0; i < size / step; i++)
+	{
+		if (key[0] < index[i][0])
+		{
+			found_key = i - 1 ;
+			break;
+		}
+	}
+	for (int i = found_key * step; i <= (found_key +1) * step ; i++)
+	{
+		if (key[0] == studs[i].surname[0])
+		{
+			cout <<studs[i].surname <<" was found" << endl;  // or return
+			break;
+		}
+	}
+	cout << key << " not found.\n";
 }
+	
 
 void rnd_fill(student *studs, int size)
 {
