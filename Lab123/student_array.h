@@ -24,3 +24,5 @@ void bubble_sort(student *studs, int size);
 void index_search(student *studs, int size);
 void rnd_fill(student *studs, int size);
 void fill_blank(student *studs, int size);
+void group_sort(student *studs, int size);
+void name_sort(student *studs, int size);

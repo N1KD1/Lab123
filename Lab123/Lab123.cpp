@@ -8,7 +8,7 @@ int main()
 	//fill_blank(all_students, arr_size);
 	rnd_fill(all_students, arr_size);
 	show_array(all_students, arr_size);
-	shaker_sort(all_students, arr_size);
+	name_sort(all_students, arr_size);
 	show_array(all_students, arr_size);
 	
 	

@@ -23,8 +23,7 @@ void show_array(const student *studs, int size)
 	}
 }
 
-
-void shaker_sort(student *studs, int size)
+void shaker_sort(student *studs, const int size)
 {
 	int left=1;
 	int right=size-1;
@@ -56,9 +55,10 @@ void shaker_sort(student *studs, int size)
 
 void group_count(student *studs, int size)
 {
+
 }
 
-void bubble_sort(student *studs, int size)
+void bubble_sort(student *studs, const int size)
 {
 	bool swapped;
 	do
@@ -100,7 +100,7 @@ void rnd_fill(student *studs, int size)
 		temp.group = groups[rand() % 5];
 		temp.surname = surname;
 		temp.mark = rand() % 60 + 40;
-		temp.status = rand() % 1;
+		temp.status = rand() % 2;
 		studs[i] = temp;
 	}
 }
@@ -114,4 +114,63 @@ void fill_blank(student *studs, int size)
 		studs[i] = temp;
 		
 	}
+}
+
+void group_sort(student* studs, int size)
+{
+	int left = 1;
+	int right = size - 1;
+	do
+	{
+		for (int i = right; i >= left; i--)
+		{
+			if (studs[i - 1].group[0] > studs[i].group[0])
+			{
+				student temp = studs[i];
+				studs[i] = studs[i - 1];
+				studs[i - 1] = temp;
+			}
+		}
+		left++;
+		for (int i = left; i <= right; i++)
+		{
+			if (studs[i - 1].group[0] > studs[i].group[0])
+			{
+				student temp = studs[i];
+				studs[i] = studs[i - 1];
+				studs[i - 1] = temp;
+			}
+		}
+		right--;
+	} while (left <= right);
+
+}
+
+void name_sort(student* studs, int size)
+{
+		int left = 1;
+		int right = size - 1;
+		do
+		{
+			for (int i = right; i >= left; i--)
+			{
+				if (studs[i - 1].surname[0] > studs[i].surname[0])
+				{
+					student temp = studs[i];
+					studs[i] = studs[i - 1];
+					studs[i - 1] = temp;
+				}
+			}
+			left++;
+			for (int i = left; i <= right; i++)
+			{
+				if (studs[i - 1].surname[0] > studs[i].surname[0])
+				{
+					student temp = studs[i];
+					studs[i] = studs[i - 1];
+					studs[i - 1] = temp;
+				}
+			}
+			right--;
+		} while (left <= right);
 }
