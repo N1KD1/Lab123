@@ -3,12 +3,10 @@
 
 int main()
 {
-	constexpr int arr_size = 30;
-	constexpr int step = 5;
+	constexpr int arr_size = 30;  //size of array
+	constexpr int step = 5;   // step(for index-sequential search)
 	constexpr  int index_size = arr_size / step;
-	std::string index[index_size];
-	student all_students[arr_size];
-	groups_amount all_groups[arr_size];
+	student all_students[arr_size];  //array
 	rnd_fill(all_students, arr_size);
 	shaker_sort(all_students,arr_size);
 	group_sort(all_students, arr_size);
@@ -21,6 +19,7 @@ int main()
 	show_array(all_students, arr_size);
 	while(true)
 	{
+		std::string index[index_size];
 		std::string key;
 		std::cout << ">>>\n";
 		std::cin >> key;

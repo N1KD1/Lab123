@@ -1,12 +1,11 @@
 #include "student_array.h"
-
 #include <iomanip>
 #include <iostream>
 #include <string>
 
 using namespace std;	
 
-void show_array(const student *studs, const int size)
+void show_array(const student *studs, const int size)  //typing array as a table
 {
 	cout <<setw(3) <<left << "#" << setw(10) << "SURNAME" << setw(10) << "GROUP" << setw(6) <<left<< "MARK" << setw(7) << right<< "STATUS\n";
 	for(int i =0;i<size;i++)
@@ -23,7 +22,7 @@ void show_array(const student *studs, const int size)
 	}
 }
 
-void shaker_sort(student *studs, const int size)
+void shaker_sort(student *studs, const int size) //shaker sort
 {
 	int left=1;
 	int right=size-1;
@@ -53,21 +52,19 @@ void shaker_sort(student *studs, const int size)
 	while (left<=right);
 }
 
-int distinct_count(const student *studs, const int size)
+int distinct_count(const student *studs, const int size) //counts how many groups in array
 {
 	int count = 0;
 	for (int i = 0; i < size; i++) {
-		// Moving the index when duplicate is found
 		while (i < size - 1 && studs[i].group == studs[i + 1].group) {
 			i++;
 		}
 		count++;
-		
 	}
 	return count;
 }
 
-void group_count(const student *studs, int size)
+void group_count(const student *studs, int size) //counts students in every group
 {
 	const int amount = distinct_count(studs, size);
 	int left = 0;
@@ -99,7 +96,7 @@ void group_count(const student *studs, int size)
 	}
 }
 
-void bubble_sort(student *studs, const int size)
+void bubble_sort(student *studs, const int size) //bubble sort
 {
 	bool swapped;
 	do
@@ -120,7 +117,7 @@ void bubble_sort(student *studs, const int size)
 	while (swapped);
 }
 
-void index_search(const std::string& key, const student* studs, const int size, std::string* index, const int step)
+void index_search(const std::string& key, const student* studs, const int size, std::string* index, const int step) // index sequential search
 {
 	int found_word = 0;
 	int found_key = 0;
@@ -137,7 +134,7 @@ void index_search(const std::string& key, const student* studs, const int size, 
 			break;
 		}
 	}
-	int success = 0;
+	int success = 0; // counts how many chars matched
 	for (int s = 0; s < key.size(); s++)
 	{
 
@@ -151,9 +148,7 @@ void index_search(const std::string& key, const student* studs, const int size, 
 					++success;
 				}
 			}
-			
 		}
-
 	}
 	if (success >= accuracy) 
 	{
@@ -166,7 +161,7 @@ void index_search(const std::string& key, const student* studs, const int size, 
 
 }
 
-void rnd_fill(student *studs, const int size)
+void rnd_fill(student *studs, const int size) //fills array quickly
 {
 	const string groups[5] = {"ABC","BSD","DOS","EUA","FAQ"};
 	srand(time(nullptr));
@@ -188,18 +183,7 @@ void rnd_fill(student *studs, const int size)
 	}
 }
 
-void fill_blank(student *studs, const int size)
-{
-	srand(time(nullptr));
-	const student temp = {"aaaa","bbbb",100,true};
-	for(int i = 0;i<size;i++)
-	{
-		studs[i] = temp;
-		
-	}
-}
-
-void group_sort(student* studs, const int size)
+void group_sort(student* studs, const int size) //sorts by groups(shaker sort used)
 {
 	int left = 1;
 	int right = size - 1;
@@ -229,7 +213,7 @@ void group_sort(student* studs, const int size)
 
 }
 
-void name_sort(student* studs, const int size)
+void name_sort(student* studs, const int size) // sorts by surnames(shaker sort used)
 {
 		int left = 1;
 		int right = size - 1;
