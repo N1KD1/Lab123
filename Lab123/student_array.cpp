@@ -34,6 +34,24 @@ void group_count(student *studs, int size)
 
 void bubble_sort(student *studs, int size)
 {
+	bool swapped;
+	do
+	{
+		swapped = false;
+		for (int i = 0; i < size - 1; i++)
+		{
+			
+			if (studs[i].mark < studs[i + 1].mark)
+			{
+				swapped = true;
+				student temp = studs[i];
+				studs[i] = studs[i + 1];
+				studs[i + 1] = temp;
+			}
+		}
+	}
+	while (swapped);
+	
 }
 
 void index_search(student *studs, int size)

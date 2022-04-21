@@ -7,7 +7,7 @@ struct student
 {
 	string surname;
 	string group;
-	float mark; // 0.0-100
+	int mark; // 0.0-100
 	bool status; // 0 - contract, 1 - budget
 };
 
