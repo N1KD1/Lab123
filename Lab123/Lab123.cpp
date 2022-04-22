@@ -19,13 +19,13 @@ int main()
 	show_array(all_students, arr_size);
 	while(true)
 	{
+		groups_list matches[step];
 		std::string index[index_size];
 		std::string key;
-		std::cout << ">>>\n";
+		std::cout << ">>>";
 		std::cin >> key;
 		name_sort(all_students, arr_size);
-		index_search(key,all_students,arr_size,index,step);
-		shaker_sort(all_students, arr_size);
+		index_search(key,all_students,arr_size,index,step,matches);
 	}
 	
 }

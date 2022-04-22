@@ -117,48 +117,93 @@ void bubble_sort(student *studs, const int size) //bubble sort
 	while (swapped);
 }
 
-void index_search(const std::string& key, const student* studs, const int size, std::string* index, const int step) // index sequential search
+void index_search(const std::string& key, const student *studs, const int size, std::string *index, const int step, groups_list *match_list) // index sequential search
 {
 	int found_word = 0;
-	int found_key = 0;
-	constexpr int accuracy = 4; // key.size() for ideal search or length of smallest word for comfort/fast search 
-	for (int i = 0; i < size / step; i++)
+	int found_key = size/step;
+	const int accuracy = 4; // key.size() for ideal search or length of smallest word for comfort/fast search
+	index[0] = studs[0].surname;
+	for (int i = 1; i < size / step; i++)
 	{
-		index[i] = studs[i * step].surname;
+		const int next = (i * step)-1;
+		index[i] = studs[next].surname;
 	}
 	for (int i = 0; i < size / step; i++)
 	{
 		if (key[0] < index[i][0])
 		{
-			found_key = i - 1;
+			found_key = i;
 			break;
 		}
 	}
+	index_match_list(found_key-1,studs,size,match_list,step);
 	int success = 0; // counts how many chars matched
+	const int right = (found_key == size / step) ? (found_key * step) - 1 : found_key * step;
+	const int left = (found_key == 5) ? found_key * step : (found_key - 1) * step;
 	for (int s = 0; s < key.size(); s++)
 	{
-
-		for (int i = found_key * step; i <= (found_key + 1) * step; i++)
+		for (int i = 0; i < step; i++)
 		{
-			if(studs[i].surname.size()>=key.size())
+			if(match_list[i].element.surname.size()>=key.size())
 			{
-				if (key[s] == studs[i].surname[s])
+				if (key[s] == match_list[i].element.surname[s])
 				{
-					found_word = i;
-					++success;
+					++match_list[i].mark;
 				}
 			}
 		}
+		// if (success >= accuracy)
+		// {
+		// 	cout << found_word + 1 << ' ' << studs[found_word].surname << " was found.\n";
+		// 	break;
+		// }
 	}
-	if (success >= accuracy) 
+	bool swapped;
+	do
 	{
-		cout << found_word +1 << ' ' << studs[found_word].surname  << " was found.\n";
+		swapped = false;
+		for (int i = 0; i < step - 1; i++)
+		{
+			if (match_list[i].mark < match_list[i + 1].mark)
+			{
+				swapped = true;
+				const groups_list temp = match_list[i];
+				match_list[i] = match_list[i + 1];
+				match_list[i + 1] = temp;
+			}
+		}
+	} while (swapped);
+	if(accuracy<=match_list[0].mark)
+	{
+		cout << match_list[0].element.surname <<" found!\n";
 	}
 	else
 	{
 		cout << key << " not found.\n";
 	}
+	for(int i =0;i<step;i++)
+	{
+		cout << match_list[i].element.surname << ' ' << match_list[i].mark << endl;
+	}
+}
 
+void index_match_list(const int left, const student *studs, const int size, groups_list *match_list, const int step)
+{
+	if(left ==0)
+	{
+		for (int i = 0; i < step; i++)
+		{
+			match_list[i] = { studs[left * step + i] };
+		}
+	}
+	else
+	{
+		for (int i = 0; i < step; i++)
+		{
+			match_list[i] = { studs[left * step + i - 1] };
+		}
+	}
+	
 }
 
 void rnd_fill(student *studs, const int size) //fills array quickly
